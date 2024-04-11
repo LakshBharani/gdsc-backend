@@ -1,20 +1,16 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"laksh.com/db"
+	"laksh.com/routes"
 )
 
 func main() {
+	db.InitDB()
 	server := gin.Default()
 
-	server.GET("/events", getEvents)
+	routes.RegisterRoutes(server)
 
 	server.Run(":8080")
-}
-
-func getEvents(context *gin.Context) {
-	context.JSON(http.StatusOK, gin.H{"message": "Hello!"})
-	println("\n")
 }
